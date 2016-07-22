@@ -110,18 +110,18 @@ if (!isset($_GET['format'])) {
             echo "<tr>\n";
             $subfields = $node->xpath('./subfield');
             foreach ($subfields as $subfield) {
-                //$code = 
-                $value = getValues( $subfield[0] );
+                $code = $subfield[0]["code"];
+                $value = getValues($subfield[0]);
                 echo "   <td>" . $value . "</td>";
             }
             echo "\n</tr>\n";
 
-            $location = getValues( $node->xpath('./subfield[@code="b"]')[0] );
-            $sublocation = getValues( $node->xpath('./subfield[@code="c"]')[0] );
-            if (strpos($sublocation, "Lehrbuchsammlung") !== FALSE) {
+            $location = getValues($node->xpath('./subfield[@code="b"]')[0]);
+            $sublocation = getValues($node->xpath('./subfield[@code="c"]')[0]);
+            if (strpos($sublocation, "Lehrbuchsammlung") !== false) {
                 $location = "LBS";
             }
-            $number = getValues( $node->xpath('./subfield[@code="f"]')[0] );
+            $number = getValues($node->xpath('./subfield[@code="f"]')[0]);
             if (array_key_exists($location, $bestand)) {
                 $bestand[$location] += $number;
             } else {
@@ -136,8 +136,8 @@ if (!isset($_GET['format'])) {
                 echo "<tr>\n";
                 $subfields = $node->xpath('./subfield');
                 foreach ($subfields as $subfield) {
-                    //$code = 
-                    $value = getValues( $subfield[0] );
+                    $code = $subfield[0]["code"];
+                    $value = getValues($subfield[0]);
                     echo "   <td>" . $value . "</td>";
                 }
                 echo "\n</tr>\n";
@@ -170,4 +170,3 @@ if (!isset($_GET['format'])) {
     }
     echo "\n</body>\n</html>";
 }
-
